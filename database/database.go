@@ -2,7 +2,7 @@ package database
 
 import (
 	"fmt"
-	"go-bookstore/pkg/models"
+	"go-bookstore/models"
 
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"

@@ -2,8 +2,8 @@ package controllers
 
 import (
 	"encoding/json"
-	"go-bookstore/pkg/database"
-	"go-bookstore/pkg/models"
+	"go-bookstore/database"
+	"go-bookstore/models"
 	"go-bookstore/pkg/utils"
 	"net/http"
 	"strconv"

@@ -1,8 +1,8 @@
 package main
 
 import (
-	"go-bookstore/pkg/database"
-	"go-bookstore/pkg/routes"
+	"go-bookstore/database"
+	"go-bookstore/routes"
 	"log"
 	"net/http"
 
