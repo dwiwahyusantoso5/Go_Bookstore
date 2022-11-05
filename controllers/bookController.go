@@ -12,9 +12,8 @@ import (
 )
 
 var (
-	author models.Author
-	book   models.Book
-	books  []models.Book
+	book  models.Book
+	books []models.Book
 )
 
 func GetAllBooks(w http.ResponseWriter, r *http.Request) {
@@ -79,7 +78,7 @@ func UpdateBook(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		panic(err)
 	}
-	query := db.Where("ID = ?", id).Find(&book)
+	query := db.Model(&models.Book{}).Where("ID = ?", id).Find(&book)
 	if query.Error != nil {
 		panic(query.Error)
 	}
@@ -112,7 +111,7 @@ func DeleteBook(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		panic(err)
 	}
-	query := db.Where("ID = ?", id).Delete(&book)
+	query := db.Model(&models.Book{}).Where("ID = ?", id).Delete(&book)
 	if query.Error != nil {
 		panic(query.Error)
 	}
