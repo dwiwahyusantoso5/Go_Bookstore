@@ -28,7 +28,7 @@ func StartDB() {
 	if err != nil {
 		panic(err)
 	}
-	db.Debug().AutoMigrate(models.Book{})
+	db.Debug().AutoMigrate(models.Book{}, models.Author{})
 }
 
 func GetDB() *gorm.DB {

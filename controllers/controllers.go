@@ -4,7 +4,7 @@ import (
 	"encoding/json"
 	"go-bookstore/database"
 	"go-bookstore/models"
-	"go-bookstore/pkg/utils"
+	"go-bookstore/utils"
 	"net/http"
 	"strconv"
 
@@ -12,13 +12,14 @@ import (
 )
 
 var (
-	book  models.Book
-	books []models.Book
+	author models.Author
+	book   models.Book
+	books  []models.Book
 )
 
 func GetAllBooks(w http.ResponseWriter, r *http.Request) {
 	db := database.GetDB()
-	query := db.Find(&books)
+	query := db.Model(&models.Book{}).Preload("Author").Find(&books)
 	if query.Error != nil {
 		panic(query.Error)
 	}
@@ -38,7 +39,7 @@ func GetBookById(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		panic(err)
 	}
-	query := db.Where("ID = ?", id).Find(&book)
+	query := db.Model(&models.Book{}).Preload("Author").Where("ID = ?", id).Find(&book)
 	if query.Error != nil {
 		panic(query.Error)
 	}
@@ -85,7 +86,7 @@ func UpdateBook(w http.ResponseWriter, r *http.Request) {
 	if b.Title != "" {
 		book.Title = b.Title
 	}
-	if b.Author != "" {
+	if b.Author != author {
 		book.Author = b.Author
 	}
 	if b.Publication != "" {
